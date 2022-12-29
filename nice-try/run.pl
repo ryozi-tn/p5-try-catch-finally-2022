@@ -22,6 +22,12 @@ sub do_something{
     print "Unreachable code?\n";
 }
 
+# 戻り値を使う
+print "# using return value\n";
+print "do_something: ", do_something(), "\n";
+
+# 戻り値を使わない場合、なぜか`print "Unreachable code?\n";` が実行される
+print "# not using return value\n";
 do_something();
 
 
@@ -32,6 +38,10 @@ __END__
 Output(stdout/stderr)
 --------------
 catch: dead at ./run.pl line 6.finally
+# using return value
+finally
+do_something: OK
+# not using return value
 finally
 Unreachable code?
 END
