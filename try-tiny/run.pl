@@ -27,6 +27,20 @@ print "# catch-return (no use return value)\n";
     print "Unreachable code?\n";
 })->();
 
+print "# try-caller\n";
+(sub{ 
+    try { 
+        print caller(), "\n";
+     }catch{print "catch: Unreachable code\n";} finally {print "finally\n";};
+})->();
+
+print "# catch-caller\n";
+(sub{ 
+    try { die "DAAI" }catch{ 
+        print caller(), "\n"; 
+    } finally {print "finally\n";};
+})->();
+
 print "# catch-die\n";
 (sub{ 
     eval{
@@ -58,29 +72,35 @@ __END__
 
 Output(stdout/stderr)
 --------------
+Exiting subroutine via last at ./run.pl line 55.
+Exiting eval via last at ./run.pl line 55.
+Exiting subroutine via last at ./run.pl line 55.
+Exiting subroutine via redo at ./run.pl line 64.
+Exiting eval via redo at ./run.pl line 64.
+Exiting subroutine via redo at ./run.pl line 64.
 # try-return (use return value)
 finally
-Unreachable code?        # <= ダメ
+Unreachable code?
 # try-return (no use return value)
 finally
-Unreachable code?        # <= ダメ
+Unreachable code?
 # catch-return (use return value)
 finally
-Unreachable code?        # <= ダメ
+Unreachable code?
 # catch-return (no use return value)
 finally
-Unreachable code?        # <= ダメ
+Unreachable code?
+# try-caller
+Try::Tiny/usr/src/app/local/lib/perl5/Try/Tiny.pm102
+finally
+# catch-caller
+Try::Tiny/usr/src/app/local/lib/perl5/Try/Tiny.pm123
+finally
 # catch-die
 finally
 # last label
-Exiting subroutine via last at ./run.pl line 41.        # <= ダメだけど挙動はよさそう
-Exiting eval via last at ./run.pl line 41.
-Exiting subroutine via last at ./run.pl line 41.
 finally
 # redo label
-Exiting subroutine via redo at ./run.pl line 50.        # <= ダメだけど挙動はよさそう
-Exiting eval via redo at ./run.pl line 50.
-Exiting subroutine via redo at ./run.pl line 50.
 finally
 finally
 OK

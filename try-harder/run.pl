@@ -26,13 +26,14 @@ print "# catch-return (no use return value)\n";
     print "Unreachable code?\n";
 })->();
 
-print "# catch-die\n";
+
+print "# try-caller\n";
 (sub{ 
-    eval{
-        try { die "DAAI" }catch{ die "DAAAAAAAAAAAAAAI" } finally {print "finally\n";}
-        print "Unreachable code?\n";
-    };
+    try { 
+        print caller(), "\n";
+    }catch{print "catch: Unreachable code\n";} finally {print "finally\n";}
 })->();
+
 
 print "# last label\n";
 (sub{
@@ -65,12 +66,12 @@ finally
 finally
 # catch-return (no use return value)
 finally
-# catch-die
+# try-caller
+main./run.pl34
 finally
 # last label
 finally
 # redo label
 finally
 finally
-                # <= OKが出てない
 FINISH

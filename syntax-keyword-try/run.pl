@@ -26,6 +26,20 @@ print "# catch-return (no use return value)\n";
     print "Unreachable code?\n";
 })->();
 
+print "# try-caller\n";
+(sub{ 
+    try { 
+        print caller(), "\n";
+     }catch($e){print "catch: Unreachable code\n";} finally {print "finally\n";}
+})->();
+
+print "# catch-caller\n";
+(sub{ 
+    try { die "DAAI" }catch($e){ 
+        print caller(), "\n"; 
+    } finally {print "finally\n";}
+})->();
+
 print "# catch-die\n";
 (sub{ 
     eval{
@@ -64,6 +78,12 @@ finally
 # catch-return (use return value)
 finally
 # catch-return (no use return value)
+finally
+# try-caller
+main./run.pl34
+finally
+# catch-caller
+main./run.pl41
 finally
 # catch-die
 finally

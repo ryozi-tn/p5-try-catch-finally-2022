@@ -26,6 +26,22 @@ print "# catch-return (no use return value)\n";
     print "Unreachable code?\n";
 })->();
 
+
+print "# try-caller\n";
+(sub{ 
+    try { 
+        print caller(), "\n";
+     }catch($e){print "catch: Unreachable code\n";} finally {print "finally\n";}
+})->();
+
+print "# catch-caller\n";
+(sub{ 
+    try { die "DAAI" }catch($e){ 
+        print caller(), "\n"; 
+    } finally {print "finally\n";}
+})->();
+
+
 print "# catch-die\n";
 (sub{ 
     eval{
@@ -57,26 +73,37 @@ __END__
 
 Output(stdout/stderr)
 --------------
+Use of uninitialized value in print at ./run.pl line 33.
+Use of uninitialized value in print at ./run.pl line 33.
+Use of uninitialized value in print at ./run.pl line 33.
+Use of uninitialized value in print at ./run.pl line 33.
+Use of uninitialized value in print at ./run.pl line 40.
+Use of uninitialized value in print at ./run.pl line 40.
+Use of uninitialized value in print at ./run.pl line 40.
+Use of uninitialized value in print at ./run.pl line 40.
+Exiting subroutine via last at ./run.pl line 56.
+Exiting eval via last at ./run.pl line 56.
+Exiting subroutine via redo at ./run.pl line 65.
+Exiting eval via redo at ./run.pl line 65.
 # try-return (use return value)
 finally
 # try-return (no use return value)
 finally
-Unreachable code?        # <= ダメ
+Unreachable code?
 # catch-return (use return value)
 finally
 # catch-return (no use return value)
 finally
-Unreachable code?        # <= ダメ
-# catch-die
-        # <= finallyが呼ばれてない
-# last label
-Exiting subroutine via last at ./run.pl line 40.        # <= ダメ
-Exiting eval via last at ./run.pl line 40.
-        # <= finallyが呼ばれてない
-# redo label
-Exiting subroutine via redo at ./run.pl line 49.        # <= ダメ
-Exiting eval via redo at ./run.pl line 49.
+Unreachable code?
+# try-caller
+main./run.pl35main::__ANON__12018UUUUUUUUUUUUU
 finally
-        # <= finallyが1つ足りない？
+# catch-caller
+main./run.pl42main::__ANON__12018UUUUUUUUUUUUU
+finally
+# catch-die
+# last label
+# redo label
+finally
 OK
 FINISH

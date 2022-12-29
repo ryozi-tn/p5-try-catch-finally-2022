@@ -26,6 +26,20 @@ print "# catch-return (no use return value)\n";
     print "Unreachable code?\n";
 })->();
 
+print "# try-caller\n";
+(sub{ 
+    try { 
+        print caller(), "\n";
+     }catch($e){print "catch: Unreachable code\n";} finally {print "finally\n";}
+})->();
+
+print "# catch-caller\n";
+(sub{ 
+    try { die "DAAI" }catch($e){ 
+        print caller(), "\n"; 
+    } finally {print "finally\n";}
+})->();
+
 print "# catch-die\n";
 (sub{ 
     eval{
@@ -69,15 +83,21 @@ try/catch/finally is experimental at ./run.pl line 19.
 try/catch is experimental at ./run.pl line 25.
 try/catch is experimental at ./run.pl line 25.
 try/catch/finally is experimental at ./run.pl line 25.
-try/catch is experimental at ./run.pl line 32.
-try/catch is experimental at ./run.pl line 32.
-try/catch/finally is experimental at ./run.pl line 32.
-try/catch is experimental at ./run.pl line 40.
-try/catch is experimental at ./run.pl line 40.
+try/catch is experimental at ./run.pl line 31.
+try/catch is experimental at ./run.pl line 33.
+try/catch/finally is experimental at ./run.pl line 33.
+try/catch is experimental at ./run.pl line 38.
+try/catch is experimental at ./run.pl line 38.
 try/catch/finally is experimental at ./run.pl line 40.
-try/catch is experimental at ./run.pl line 49.
-try/catch is experimental at ./run.pl line 49.
-try/catch/finally is experimental at ./run.pl line 49.
+try/catch is experimental at ./run.pl line 46.
+try/catch is experimental at ./run.pl line 46.
+try/catch/finally is experimental at ./run.pl line 46.
+try/catch is experimental at ./run.pl line 54.
+try/catch is experimental at ./run.pl line 54.
+try/catch/finally is experimental at ./run.pl line 54.
+try/catch is experimental at ./run.pl line 63.
+try/catch is experimental at ./run.pl line 63.
+try/catch/finally is experimental at ./run.pl line 63.
 # try-return (use return value)
 finally
 # try-return (no use return value)
@@ -85,6 +105,12 @@ finally
 # catch-return (use return value)
 finally
 # catch-return (no use return value)
+finally
+# try-caller
+main./run.pl34
+finally
+# catch-caller
+main./run.pl41
 finally
 # catch-die
 finally
