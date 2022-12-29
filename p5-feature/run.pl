@@ -6,13 +6,17 @@ try {
     die "dead";
 } catch($e) {
     print "catch: $e";
-} 
+} finally {
+    print "finally\n";
+}
 
 sub do_something{
     try {
         return "OK";
     } catch($e) {
         print "catch: $e";
+    } finally {
+        print "finally\n";
     }
     print "Unreachable code?\n";
 }
@@ -27,7 +31,11 @@ Output(stdout/stderr)
 --------------
 try/catch is experimental at ./run.pl line 5.
 try/catch is experimental at ./run.pl line 7.
-try/catch is experimental at ./run.pl line 12.
+try/catch/finally is experimental at ./run.pl line 9.
 try/catch is experimental at ./run.pl line 14.
+try/catch is experimental at ./run.pl line 16.
+try/catch/finally is experimental at ./run.pl line 18.
 catch: dead at ./run.pl line 6.
+finally
+finally
 END
