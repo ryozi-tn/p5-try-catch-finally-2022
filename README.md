@@ -19,7 +19,7 @@ sudo docker build -t $(basename $PWD) . && sudo docker run --rm -it "$(basename 
 一括実行する場合
 
 ```bash
-for dir in try-tiny nice-try p5-feature; do
+for dir in try-tiny nice-try p5-feature try-handler syntax-keyword-try; do
   (
     cd "$dir"
     sudo docker build -t "p5-try-catch-finally:$(basename $PWD)" . &&

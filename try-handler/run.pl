@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Nice::Try;
+use Try::Harder;
 
 print "# try-return (use return value)\n";
 $_ = (sub{ 
@@ -61,22 +61,16 @@ Output(stdout/stderr)
 finally
 # try-return (no use return value)
 finally
-Unreachable code?        # <= ダメ
 # catch-return (use return value)
 finally
 # catch-return (no use return value)
 finally
-Unreachable code?        # <= ダメ
 # catch-die
-        # <= finallyが呼ばれてない
-# last label
-Exiting subroutine via last at ./run.pl line 40.        # <= ダメ
-Exiting eval via last at ./run.pl line 40.
-        # <= finallyが呼ばれてない
-# redo label
-Exiting subroutine via redo at ./run.pl line 49.        # <= ダメ
-Exiting eval via redo at ./run.pl line 49.
 finally
-        # <= finallyが1つ足りない？
-OK
+# last label
+finally
+# redo label
+finally
+finally
+                # <= OKが出てない
 FINISH

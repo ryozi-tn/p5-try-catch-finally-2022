@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use feature qw(try);
+use Syntax::Keyword::Try;
 
 print "# try-return (use return value)\n";
 $_ = (sub{ 
@@ -57,27 +57,6 @@ __END__
 
 Output(stdout/stderr)
 --------------
-try/catch is experimental at ./run.pl line 7.
-try/catch is experimental at ./run.pl line 7.
-try/catch/finally is experimental at ./run.pl line 7.
-try/catch is experimental at ./run.pl line 13.
-try/catch is experimental at ./run.pl line 13.
-try/catch/finally is experimental at ./run.pl line 13.
-try/catch is experimental at ./run.pl line 19.
-try/catch is experimental at ./run.pl line 19.
-try/catch/finally is experimental at ./run.pl line 19.
-try/catch is experimental at ./run.pl line 25.
-try/catch is experimental at ./run.pl line 25.
-try/catch/finally is experimental at ./run.pl line 25.
-try/catch is experimental at ./run.pl line 32.
-try/catch is experimental at ./run.pl line 32.
-try/catch/finally is experimental at ./run.pl line 32.
-try/catch is experimental at ./run.pl line 40.
-try/catch is experimental at ./run.pl line 40.
-try/catch/finally is experimental at ./run.pl line 40.
-try/catch is experimental at ./run.pl line 49.
-try/catch is experimental at ./run.pl line 49.
-try/catch/finally is experimental at ./run.pl line 49.
 # try-return (use return value)
 finally
 # try-return (no use return value)
