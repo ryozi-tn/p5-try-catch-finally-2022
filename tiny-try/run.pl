@@ -8,12 +8,17 @@ try {
     print "catch: $_";
 };
 
-try {
-    die "dead";
-} catch {
-    print "catch: $_";
-}; 
 
+sub do_something{
+    try {
+        return "OK";
+    } catch {
+        print "catch: $_";
+    }; 
+    print "Unreachable code?\n";
+}
+
+do_something();
 
 print "END\n";
 
@@ -22,5 +27,5 @@ __END__
 Output(stdout/stderr)
 --------------
 catch: dead at ./run.pl line 6.
-catch: dead at ./run.pl line 12.
+Unreachable code?
 END

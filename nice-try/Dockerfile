@@ -1,4 +1,4 @@
-FROM perl:5.36.0-slim
+FROM perl:5.16-slim-stretch
 
 RUN cpanm Carton && \
     mkdir -p /usr/src/app
