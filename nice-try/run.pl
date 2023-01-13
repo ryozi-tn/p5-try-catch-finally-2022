@@ -89,12 +89,10 @@ Exiting eval via redo at ./run.pl line 65.
 finally
 # try-return (no use return value)
 finally
-Unreachable code?
 # catch-return (use return value)
 finally
 # catch-return (no use return value)
 finally
-Unreachable code?
 # try-caller
 main./run.pl35main::__ANON__12018UUUUUUUUUUUUU
 finally
@@ -102,6 +100,7 @@ finally
 main./run.pl42main::__ANON__12018UUUUUUUUUUUUU
 finally
 # catch-die
+finally
 # last label
 # redo label
 finally
